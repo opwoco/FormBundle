@@ -1,0 +1,19 @@
+{
+    "name": "alsatian/doctrine-extensions",
+    "description": "Server side Select2 integration for Symfony3",
+    "keywords": [symfony3,select2],
+    "license": "MIT",
+    "require": {
+		"symfony/framework-bundle": "~2.8|~3.0"
+    },
+
+    "suggest": {
+        "doctrine/doctrine-bundle": "to use the Select2EntityType",
+        "doctrine/mongodb-odm-bundle": "to use the Select2DocumentType"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alsatian\\FormBundleBundle\\": "/"
+        }
+    }
+}
