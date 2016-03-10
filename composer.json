@@ -1,7 +1,7 @@
 {
     "name": "alsatian/doctrine-extensions",
     "description": "Server side Select2 integration for Symfony3",
-    "keywords": [symfony3,select2],
+    "keywords": ["symfony3","select2"],
     "license": "MIT",
     "require": {
 		"symfony/framework-bundle": "~2.8|~3.0"
