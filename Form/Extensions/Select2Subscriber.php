@@ -87,9 +87,7 @@ class Select2Subscriber implements EventSubscriberInterface
         {
             case Select2EntityType::class :
             case Select2DocumentType::class :
-                if($data instanceOf \Doctrine\Common\Collections\Collection){$data = $data->toArray();}
-
-                if(is_array($data)){
+                if(is_array($data) || $data instanceOf \Traversable){
                     foreach($data as $Entity){
                         $this->addChoice($choices,$Entity,$options['class'],$type);
                     }
