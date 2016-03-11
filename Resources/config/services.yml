@@ -1,11 +1,4 @@
 parameters:
-    alsatian_form.parameters.select2_choice.attr_class: select2
-    alsatian_form.parameters.select2_entity.attr_class: select2
-    alsatian_form.parameters.select2_document.attr_class: select2
-
-    alsatian_form.parameters.select2_entity.choice_label: ajaxName
-    alsatian_form.parameters.select2_document.choice_label: ajaxName
-
     alsatian_form.parameters.select2.enabled_Types: []
     
 services:
@@ -33,14 +26,14 @@ services:
     alsatian_form.form_type.select2_entity:
         class: Alsatian\FormBundle\Form\Select2EntityType
         public: false
-        arguments:[%alsatian_form.parameters.select2_entity.attr_class%,%alsatian_form.parameters.select2_entity.choice_label%]
+        arguments:[%alsatian_form.parameters.select2_entity.attr_class%]
         calls:
             - [setRouter,["@router"]]
 
     alsatian_form.form_type.select2_document:
         class: Alsatian\FormBundle\Form\Select2DocumentType
         public: false
-        arguments:[%alsatian_form.parameters.select2_document.attr_class%,%alsatian_form.parameters.select2_document.choice_label%]
+        arguments:[%alsatian_form.parameters.select2_document.attr_class%]
         calls:
             - [setRouter,["@router"]]
 
