@@ -8,25 +8,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractRoutableType extends AbstractType
 {
-    private $router;
+    protected $router;
+	protected $default_attr_class;
+	
+	public __construct($default_attr_class)
+    {
+        $this->default_attr_class = $default_attr_class;
+    }
         
     public function setRouter($router)
     {
         $this->router = $router;
     }
-    
+	
     public function configureOptions(OptionsResolver $resolver)
     {  
-        $resolver->setDefault('route', false);
-                
-        if($option['route']){
-            $resolver->setDefault('attr', function(Options $options, $attr){
+        $resolver->setDefaults(array('route'=>false,'route_params'=>array()));		
 
-                $this->setRouter();                
-                $attr['data-ajax--url']=$this->router->generate($options['route']);
-
-                return $attr;
-            });
-        }
+		$resolver->setDefault('attr', function(Options $options, $attr){
+			if($this->default_attr_class){
+				$attr['class'] = $this->default_attr_class;
+			}
+			
+			if($option['route']){
+				$this->setRouter();                
+				$attr['data-ajax--url']=$this->router->generate($options['route'],$options['route_params']);
+			}
+			
+			return $attr;
+		});
     }
 }
