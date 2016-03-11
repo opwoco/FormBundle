@@ -12,12 +12,12 @@ services:
 # Select 2
 
     alsatian_form.form_extension.select2:
-        class: Alsatian\FormBundle\Form\Extensions\AjaxExtension
+        class: Alsatian\FormBundle\Form\Extensions\Select2Extension
         public: false
         arguments: ["@alsatian_form.form_event_subscriber.select2"]
              
     alsatian_form.form_event_subscriber.select2:
-        class: Alsatian\FormBundle\Form\Extensions\AjaxSubscriber
+        class: Alsatian\FormBundle\Form\Extensions\Select2Subscriber
         public: false
         arguments: [%alsatian_form.parameters.select2.enabled_Types%]
         calls:
