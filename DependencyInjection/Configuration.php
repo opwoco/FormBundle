@@ -15,6 +15,8 @@ class Configuration implements ConfigurationInterface
             ->append($this->getSelect2Node('select2_choice'))
             ->append($this->getSelect2Node('select2_document'))
             ->append($this->getSelect2Node('select2_entity'))
+            ->append($this->getSelect2Node('autocomplete'))
+            ;
         
         return $treeBuilder;
     }
