@@ -43,6 +43,17 @@ class AlsatianFormExtension extends Extension
             $formTypes[] = $definition->getClass();
         }
         
+        if($configFormBundle['autocomplete']['enabled']){
+            $definition = $container->getDefinition('alsatian_form.form_type.autocomplete');
+            $definition->setPublic(true);
+            $definition->addTag('form.type');
+        }
+        
+        $container->setParameter('alsatian_form.parameters.select2_choice.attr_class', $configFormBundle['select2_choice']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.select2_entity.attr_class', $configFormBundle['select2_entity']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.select2_document.attr_class', $configFormBundle['select2_document']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.autocomplete.attr_class', $configFormBundle['autocomplete']['attr_class']);
+
         if($formTypes){
             $definition = $container->getDefinition('alsatian_form.form_extension.select2');
             $definition->setPublic(true);
@@ -50,9 +61,5 @@ class AlsatianFormExtension extends Extension
             
             $container->setParameter('alsatian_form.parameters.select2.enabled_Types', $formTypes);
         }
-
-        $container->setParameter('alsatian_form.parameters.select2_choice.attr_class', $uploadableConfig['select2_choice']['attr_class']);
-        $container->setParameter('alsatian_form.parameters.select2_entity.attr_class', $uploadableConfig['select2_entity']['attr_class']);
-        $container->setParameter('alsatian_form.parameters.select2_document.attr_class', $uploadableConfig['select2_document']['attr_class']);
     }
 }
