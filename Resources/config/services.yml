@@ -2,7 +2,15 @@ parameters:
     alsatian_form.parameters.select2.enabled_Types: []
     
 services:
+    alsatian_form.form_type.abstract_routable:
+        class: Alsatian\FormBundle\Form\AbstractRoutableType
+        abstract:  true
+        public: false
+        calls:
+            - [setRouter,["@router"]]
+
 # Select 2
+
     alsatian_form.form_extension.select2:
         class: Alsatian\FormBundle\Form\Extensions\AjaxExtension
         public: false
@@ -16,33 +24,36 @@ services:
             - [setEntityManager,["@doctrine.orm.entity_manager"]]
             - [setDocumentManager,["@doctrine.odm.mongodb.document_manager"]]
 
+    alsatian_form.form_type.abstract_select2:
+        class: Alsatian\FormBundle\Form\AbstractRoutableType
+        parent: alsatian_form.form_type.abstract_routable
+        abstract:  true
+        public: false
+
     alsatian_form.form_type.select2_choice:
         class: Alsatian\FormBundle\Form\Select2ChoiceType
+        parent: alsatian_form.form_type.abstract_select2
         public: false
         arguments:[%alsatian_form.parameters.select2_choice.attr_class%]
-        calls:
-            - [setRouter,["@router"]]
 
     alsatian_form.form_type.select2_entity:
         class: Alsatian\FormBundle\Form\Select2EntityType
+        parent: alsatian_form.form_type.abstract_select2
         public: false
         arguments:[%alsatian_form.parameters.select2_entity.attr_class%]
-        calls:
-            - [setRouter,["@router"]]
 
     alsatian_form.form_type.select2_document:
         class: Alsatian\FormBundle\Form\Select2DocumentType
+        parent: alsatian_form.form_type.abstract_select2
         public: false
         arguments:[%alsatian_form.parameters.select2_document.attr_class%]
-        calls:
-            - [setRouter,["@router"]]
 
 # Others ...
     alsatian_form.form_type.autocomplete:
         class: Alsatian\FormBundle\Form\AutocompleteType
+        parent: alsatian_form.form_type.abstract_routable
         tags:
              - { name: form.type }
-        arguments: ["@router"]
 
     alsatian_form.form_type.datepicker:
         class: Alsatian\FormBundle\Form\DatePickerType
