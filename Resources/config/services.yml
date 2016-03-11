@@ -34,25 +34,25 @@ services:
         class: Alsatian\FormBundle\Form\Select2ChoiceType
         parent: alsatian_form.form_type.abstract_select2
         public: false
-        arguments:[%alsatian_form.parameters.select2_choice.attr_class%]
+        arguments: [%alsatian_form.parameters.select2_choice.attr_class%]
 
     alsatian_form.form_type.select2_entity:
         class: Alsatian\FormBundle\Form\Select2EntityType
         parent: alsatian_form.form_type.abstract_select2
         public: false
-        arguments:[%alsatian_form.parameters.select2_entity.attr_class%]
+        arguments: [%alsatian_form.parameters.select2_entity.attr_class%]
 
     alsatian_form.form_type.select2_document:
         class: Alsatian\FormBundle\Form\Select2DocumentType
         parent: alsatian_form.form_type.abstract_select2
         public: false
-        arguments:[%alsatian_form.parameters.select2_document.attr_class%]
+        arguments: [%alsatian_form.parameters.select2_document.attr_class%]
 
 # Others ...
     alsatian_form.form_type.autocomplete:
         class: Alsatian\FormBundle\Form\AutocompleteType
         parent: alsatian_form.form_type.abstract_routable
-        arguments:[%alsatian_form.parameters.autocomplete.attr_class%]
+        arguments: [%alsatian_form.parameters.autocomplete.attr_class%]
 
     alsatian_form.form_type.datepicker:
         class: Alsatian\FormBundle\Form\DatePickerType
