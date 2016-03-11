@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "to use the Select2EntityType",
         "doctrine/mongodb-odm-bundle": "to use the Select2DocumentType"
     },
+    
     "autoload": {
         "psr-4": {"Alsatian\\FormBundle\\": ""}
     }
