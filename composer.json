@@ -4,7 +4,7 @@
     "keywords": ["symfony3","select2"],
     "license": "MIT",
     "require": {
-		"symfony/framework-bundle": "~2.8|~3.0"
+        "symfony/framework-bundle": "~2.8|~3.0"
     },
 
     "suggest": {
