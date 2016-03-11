@@ -12,12 +12,10 @@ class Select2EntityType extends AbstractType
 {
     private $router = null;
     private $inputClass;
-    private $choiceLabel;
     
-    public __construct($inputClass, $choiceLabel)
+    public __construct($inputClass)
     {
         $this->inputClass = $inputClass;
-        $this->choiceLabel = $choiceLabel;
     }
         
     public function setRouter($router)
@@ -48,10 +46,6 @@ class Select2EntityType extends AbstractType
             };
             
             return $choices;
-        }
-        
-        if($this->choiceLabel){
-            $resolver->setDefault('choice_label',$this->choiceLabel);
         }
     }
 
