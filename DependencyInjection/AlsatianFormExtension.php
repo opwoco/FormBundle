@@ -25,9 +25,6 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
-            if($uploadableConfig['select2_choice']['attr_class']){
-                $container->setParameter('alsatian_form.parameters.select2_choice.attr_class', $uploadableConfig['select2_choice']['attr_class']);
-            }
         }
         
         if($configFormBundle['select2_entity']['enabled']){
@@ -36,12 +33,6 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
-            if($uploadableConfig['select2_entity']['attr_class']){
-                $container->setParameter('alsatian_form.parameters.select2_entity.attr_class', $uploadableConfig['select2_entity']['attr_class']);
-            }
-            if($uploadableConfig['select2_entity']['choice_label']){
-                $container->setParameter('alsatian_form.parameters.select2_entity.choice_label', $uploadableConfig['select2_entity']['choice_label']);
-            }
         }
         
         if($configFormBundle['select2_document']['enabled']){
@@ -50,12 +41,6 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
-            if($uploadableConfig['select2_document']['attr_class']){
-                $container->setParameter('alsatian_form.parameters.select2_document.attr_class', $uploadableConfig['select2_document']['attr_class']);
-            }
-            if($uploadableConfig['select2_document']['choice_label']){
-                $container->setParameter('alsatian_form.parameters.select2_document.choice_label', $uploadableConfig['select2_document']['choice_label']);
-            }
         }
         
         if($formTypes){
@@ -64,6 +49,10 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type_extension', array('extended_type'=>'Symfony\Component\Form\Extension\Core\Type\FormType'));
             
             $container->setParameter('alsatian_form.parameters.select2.enabled_Types', $formTypes);
-        }        
+        }
+
+        $container->setParameter('alsatian_form.parameters.select2_choice.attr_class', $uploadableConfig['select2_choice']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.select2_entity.attr_class', $uploadableConfig['select2_entity']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.select2_document.attr_class', $uploadableConfig['select2_document']['attr_class']);
     }
 }
