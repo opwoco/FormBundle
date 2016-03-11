@@ -52,17 +52,12 @@ services:
     alsatian_form.form_type.autocomplete:
         class: Alsatian\FormBundle\Form\AutocompleteType
         parent: alsatian_form.form_type.abstract_routable
-        tags:
-             - { name: form.type }
+        arguments:[%alsatian_form.parameters.autocomplete.attr_class%]
 
     alsatian_form.form_type.datepicker:
         class: Alsatian\FormBundle\Form\DatePickerType
-        tags:
-            - { name: form.type, alias: datepicker }
         arguments: ["@request_stack"]
 
     alsatian_form.form_type.datetimepicker:
         class: Alsatian\FormBundle\Form\DateTimePickerType
-        tags:
-            - { name: form.type, alias: datetimepicker }
         arguments: ["@request_stack"]
