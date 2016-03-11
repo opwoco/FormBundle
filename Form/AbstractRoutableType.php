@@ -9,9 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class AbstractRoutableType extends AbstractType
 {
     protected $router;
-	protected $default_attr_class;
+    protected $default_attr_class;
 	
-	public __construct($default_attr_class)
+    public __construct($default_attr_class)
     {
         $this->default_attr_class = $default_attr_class;
     }
