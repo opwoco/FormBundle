@@ -1,5 +1,5 @@
 parameters:
-    alsatian_form.parameters.select2.enabled_Types: []
+    alsatian_form.parameters.extensible.enabled_Types: []
     
 services:
     alsatian_form.form_type.abstract_routable:
@@ -9,46 +9,46 @@ services:
         calls:
             - [setRouter,["@router"]]
 
-# Select 2
+# Extensible types
 
-    alsatian_form.form_extension.select2:
-        class: Alsatian\FormBundle\Form\Extensions\Select2Extension
+    alsatian_form.form_extension.extensible:
+        class: Alsatian\FormBundle\Form\Extensions\ExtensibleExtension
         public: false
-        arguments: ["@alsatian_form.form_event_subscriber.select2"]
+        arguments: ["@alsatian_form.form_event_subscriber.extensible"]
              
-    alsatian_form.form_event_subscriber.select2:
-        class: Alsatian\FormBundle\Form\Extensions\Select2Subscriber
+    alsatian_form.form_event_subscriber.extensible:
+        class: Alsatian\FormBundle\Form\Extensions\ExtensibleSubscriber
         public: false
-        arguments: [%alsatian_form.parameters.select2.enabled_Types%]
+        arguments: [%alsatian_form.parameters.extensible.enabled_Types%]
         calls:
             - [setEntityManager,["@doctrine.orm.entity_manager"]]
             - [setDocumentManager,["@doctrine.odm.mongodb.document_manager"]]
 
-    alsatian_form.form_type.abstract_select2:
+    alsatian_form.form_type.abstract_extensible:
         class: Alsatian\FormBundle\Form\AbstractRoutableType
         parent: alsatian_form.form_type.abstract_routable
         abstract:  true
         public: false
 
-    alsatian_form.form_type.select2_choice:
-        class: Alsatian\FormBundle\Form\Select2ChoiceType
-        parent: alsatian_form.form_type.abstract_select2
+    alsatian_form.form_type.extensible_choice:
+        class: Alsatian\FormBundle\Form\ExtensibleChoiceType
+        parent: alsatian_form.form_type.abstract_extensible
         public: false
-        arguments: [%alsatian_form.parameters.select2_choice.attr_class%]
+        arguments: [%alsatian_form.parameters.extensible_choice.attr_class%]
 
-    alsatian_form.form_type.select2_entity:
-        class: Alsatian\FormBundle\Form\Select2EntityType
-        parent: alsatian_form.form_type.abstract_select2
+    alsatian_form.form_type.extensible_entity:
+        class: Alsatian\FormBundle\Form\ExtensibleEntityType
+        parent: alsatian_form.form_type.abstract_extensible
         public: false
-        arguments: [%alsatian_form.parameters.select2_entity.attr_class%]
+        arguments: [%alsatian_form.parameters.extensible_entity.attr_class%]
 
-    alsatian_form.form_type.select2_document:
-        class: Alsatian\FormBundle\Form\Select2DocumentType
-        parent: alsatian_form.form_type.abstract_select2
+    alsatian_form.form_type.extensible_document:
+        class: Alsatian\FormBundle\Form\ExtensibleDocumentType
+        parent: alsatian_form.form_type.abstract_extensible
         public: false
-        arguments: [%alsatian_form.parameters.select2_document.attr_class%]
+        arguments: [%alsatian_form.parameters.extensible_document.attr_class%]
 
-# Others ...
+# Others Types
     alsatian_form.form_type.autocomplete:
         class: Alsatian\FormBundle\Form\AutocompleteType
         parent: alsatian_form.form_type.abstract_routable
