@@ -15,24 +15,24 @@ class AlsatianFormExtension extends Extension
         
         $formTypes = array();
         
-        if($configFormBundle['select2_choice']['enabled']){
-            $definition = $container->getDefinition('alsatian_form.form_type.select2_choice');
+        if($configFormBundle['extensible_choice']['enabled']){
+            $definition = $container->getDefinition('alsatian_form.form_type.extensible_choice');
             $definition->setPublic(true);
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
         }
         
-        if($configFormBundle['select2_entity']['enabled']){
-            $definition = $container->getDefinition('alsatian_form.form_type.select2_entity');
+        if($configFormBundle['extensible_entity']['enabled']){
+            $definition = $container->getDefinition('alsatian_form.form_type.extensible_entity');
             $definition->setPublic(true);
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
         }
         
-        if($configFormBundle['select2_document']['enabled']){
-            $definition = $container->getDefinition('alsatian_form.form_type.select2_document');
+        if($configFormBundle['extensible_document']['enabled']){
+            $definition = $container->getDefinition('alsatian_form.form_type.extensible_document');
             $definition->setPublic(true);
             $definition->addTag('form.type');
             
@@ -45,16 +45,16 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
         }
         
-        $container->setParameter('alsatian_form.parameters.select2_choice.attr_class', $configFormBundle['select2_choice']['attr_class']);
-        $container->setParameter('alsatian_form.parameters.select2_entity.attr_class', $configFormBundle['select2_entity']['attr_class']);
-        $container->setParameter('alsatian_form.parameters.select2_document.attr_class', $configFormBundle['select2_document']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.extensible_choice.attr_class', $configFormBundle['extensible_choice']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.extensible_entity.attr_class', $configFormBundle['extensible_entity']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.extensible_document.attr_class', $configFormBundle['extensible_document']['attr_class']);
         $container->setParameter('alsatian_form.parameters.autocomplete.attr_class', $configFormBundle['autocomplete']['attr_class']);
         if($formTypes){
-            $definition = $container->getDefinition('alsatian_form.form_extension.select2');
+            $definition = $container->getDefinition('alsatian_form.form_extension.extensible');
             $definition->setPublic(true);
             $definition->addTag('form.type_extension', array('extended_type'=>'Symfony\Component\Form\Extension\Core\Type\FormType'));
             
-            $container->setParameter('alsatian_form.parameters.select2.enabled_Types', $formTypes);
+            $container->setParameter('alsatian_form.parameters.extensible.enabled_Types', $formTypes);
         }
     }
 }
