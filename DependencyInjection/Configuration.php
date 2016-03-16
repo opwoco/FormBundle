@@ -12,16 +12,16 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('alsatian_form');
         
         $rootNode
-            ->append($this->getSelect2Node('select2_choice'))
-            ->append($this->getSelect2Node('select2_document'))
-            ->append($this->getSelect2Node('select2_entity'))
-            ->append($this->getSelect2Node('autocomplete'))
+            ->append($this->getNode('extensible_choice'))
+            ->append($this->getNode('extensible_document'))
+            ->append($this->getNode('extensible_entity'))
+            ->append($this->getNode('autocomplete'))
             ;
         
         return $treeBuilder;
     }
     
-    private function getSelect2Node($name)
+    private function getNode($name)
     {
         $treeBuilder = new TreeBuilder();
         $node = $treeBuilder->root($name);
