@@ -30,7 +30,7 @@ abstract class AbstractRoutableType extends AbstractType
                 $attr['class'] = $this->default_attr_class;
             }
             
-            if($option['route']){
+            if($options['route']){
                 $this->setRouter();                
                 $attr['data-ajax--url']=$this->router->generate($options['route'],$options['route_params']);
             }
