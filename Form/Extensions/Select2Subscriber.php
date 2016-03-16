@@ -5,14 +5,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-use Alsatian\FormBundle\Form\Select2ChoiceType;
-use Alsatian\FormBundle\Form\Select2DocumentType;
-use Alsatian\FormBundle\Form\Select2EntityType;
+use Alsatian\FormBundle\Form\ExtensibleChoiceType;
+use Alsatian\FormBundle\Form\ExtensibleDocumentType;
+use Alsatian\FormBundle\Form\ExtensibleEntityType;
 
 use Symfony\Component\Form\ResolvedFormTypeInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class Select2Subscriber implements EventSubscriberInterface
+class ExtensibleSubscriber implements EventSubscriberInterface
 {
     private $enabledTypes;
 
@@ -85,8 +85,8 @@ class Select2Subscriber implements EventSubscriberInterface
         
         switch($type)
         {
-            case Select2EntityType::class :
-            case Select2DocumentType::class :
+            case ExtensibleEntityType::class :
+            case ExtensibleDocumentType::class :
                 if(is_array($data) || $data instanceOf \Traversable){
                     foreach($data as $Entity){
                         $this->addChoice($choices,$Entity,$options['class'],$type);
@@ -96,7 +96,7 @@ class Select2Subscriber implements EventSubscriberInterface
                     $this->addChoice($choices,$data,$options['class'],$type);
                 }
             break;
-            case Select2ChoiceType::class:
+            case ExtensibleChoiceType::class:
                 if(is_array($data)){
                     foreach($data as $choice){
                         $choices[$choice] = $choice;
@@ -120,10 +120,10 @@ class Select2Subscriber implements EventSubscriberInterface
         }
         else{
             switch($type){
-                case Select2EntityType::class :
+                case ExtensibleEntityType::class :
                     $array[] = $this->findEm($class,$data);
                 break;
-                case Select2DocumentType::class :
+                case ExtensibleDocumentType::class :
                     $array[] = $this->findDm($class,$data);
                 break;
             }
