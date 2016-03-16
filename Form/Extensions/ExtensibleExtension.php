@@ -6,19 +6,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
-class Select2Extension extends AbstractTypeExtension
+class ExtensibleExtension extends AbstractTypeExtension
 {
-    private $ajaxSubscriber;
+    private $extensibleSubscriber;
 
-    public function __construct($ajaxSubscriber) {
-        $this->ajaxSubscriber = $ajaxSubscriber;
+    public function __construct($extensibleSubscriber) {
+        $this->extensibleSubscriber = $extensibleSubscriber;
     }
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if($builder->getForm()->isRoot())
         {
-            $builder->addEventSubscriber($this->ajaxSubscriber);
+            $builder->addEventSubscriber($this->extensibleSubscriber);
         }
     }
     
