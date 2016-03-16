@@ -3,7 +3,7 @@ namespace Alsatian\FormBundle\Form;
 
 use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType;
 
-class Select2DocumentType extends AbstractSelect2Type
+class Select2DocumentType extends AbstractExtensibleChoicesType
 {
     public function getParent()
     {
