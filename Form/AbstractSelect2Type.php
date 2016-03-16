@@ -9,12 +9,7 @@ abstract class AbstractSelect2Type extends AbstractRoutableType
     public function configureOptions(OptionsResolver $resolver)
     {  
         parent::configureOptions($resolver);
-        $resolver->setDefault('choices', function($options,$choices){
-            if($option['route']){
-                $choices = array();
-            };
-            
-            return $choices;
-        }
+        
+        $resolver-> replaceDefaults(array('choices'=>array()));
     }
 }
