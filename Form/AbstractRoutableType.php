@@ -11,14 +11,10 @@ abstract class AbstractRoutableType extends AbstractType
     protected $router;
     protected $default_attr_class;
     
-    public function __construct($default_attr_class)
-    {
-        $this->default_attr_class = $default_attr_class;
-    }
-        
-    public function setRouter($router)
+    public function __construct($router,$default_attr_class)
     {
         $this->router = $router;
+        $this->default_attr_class = $default_attr_class;
     }
     
     public function configureOptions(OptionsResolver $resolver)
@@ -30,8 +26,7 @@ abstract class AbstractRoutableType extends AbstractType
                 $attr['class'] = $this->default_attr_class;
             }
             
-            if($options['route']){
-                $this->setRouter();                
+            if($options['route']){               
                 $attr['data-ajax--url']=$this->router->generate($options['route'],$options['route_params']);
             }
             
