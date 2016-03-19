@@ -6,8 +6,7 @@ services:
         class: Alsatian\FormBundle\Form\AbstractRoutableType
         abstract:  true
         public: false
-        calls:
-            - [setRouter,["@router"]]
+        arguments: ["@router"]
 
 # Extensible types
 
