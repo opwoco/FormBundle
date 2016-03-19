@@ -20,7 +20,7 @@ class ExtensibleSubscriber implements EventSubscriberInterface
     private $dm = null;
     private $accessor = null;
     
-    public function __contruct($enabledTypes)
+    public function __construct($enabledTypes)
     {
         $this->enabledTypes = $enabledTypes;
     }
