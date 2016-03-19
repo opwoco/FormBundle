@@ -10,6 +10,6 @@ abstract class AbstractExtensibleChoicesType extends AbstractRoutableType
     {  
         parent::configureOptions($resolver);
         
-        $resolver->replaceDefaults(array('choices'=>array()));
+        $resolver->setDefault('choices',array());
     }
 }
