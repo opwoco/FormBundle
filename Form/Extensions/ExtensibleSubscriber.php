@@ -130,9 +130,14 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         }
     }
     
+    private function getPropertyAccessor()
+    {
+        $this->accessor = PropertyAccess::createPropertyAccessor();
+    }
+    
     private function isReadable($data,$property){
         if(!$this->accessor){
-            $this->accessor = PropertyAccess::createPropertyAccessorBuilder();
+            $this->getPropertyAccessor();
         }
         
         return $this->accessor->isReadable($data,$property);
@@ -140,7 +145,7 @@ class ExtensibleSubscriber implements EventSubscriberInterface
     
     private function getValue($data,$property){
         if(!$this->accessor){
-            $this->accessor = PropertyAccess::createPropertyAccessorBuilder();
+            $this->getPropertyAccessor();
         }
         
         return $this->accessor->getValue($data,$property);
