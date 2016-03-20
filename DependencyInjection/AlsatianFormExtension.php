@@ -45,10 +45,25 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
         }
         
+        if($configFormBundle['date_picker']['enabled']){
+            $definition = $container->getDefinition('alsatian_form.form_type.date_picker');
+            $definition->setPublic(true);
+            $definition->addTag('form.type');
+        }
+        
+        if($configFormBundle['datetime_picker']['enabled']){
+            $definition = $container->getDefinition('alsatian_form.form_type.datetime_picker');
+            $definition->setPublic(true);
+            $definition->addTag('form.type');
+        }
+        
         $container->setParameter('alsatian_form.parameters.extensible_choice.attr_class', $configFormBundle['extensible_choice']['attr_class']);
         $container->setParameter('alsatian_form.parameters.extensible_entity.attr_class', $configFormBundle['extensible_entity']['attr_class']);
         $container->setParameter('alsatian_form.parameters.extensible_document.attr_class', $configFormBundle['extensible_document']['attr_class']);
         $container->setParameter('alsatian_form.parameters.autocomplete.attr_class', $configFormBundle['autocomplete']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.date_picker.attr_class', $configFormBundle['date_picker']['attr_class']);
+        $container->setParameter('alsatian_form.parameters.datetime_picker.attr_class', $configFormBundle['datetime_picker']['attr_class']);
+        
         if($formTypes){
             $definition = $container->getDefinition('alsatian_form.form_extension.extensible');
             $definition->setPublic(true);
