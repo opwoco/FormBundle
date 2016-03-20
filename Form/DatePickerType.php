@@ -28,7 +28,7 @@ class DatePickerType extends AbstractType
         $intl = new \IntlDateFormatter($this->request_stack->getCurrentRequest()->getLocale(), \IntlDateFormatter::SHORT, \IntlDateFormatter::NONE);
 		$pattern = $intl->getPattern();
 
-        $resolver->setDefault('format'=>$pattern,'widget'=>'single_text');
+        $resolver->setDefaults(array('format'=>$pattern,'widget'=>'single_text'));
 
         $resolver->setDefault('attr', function(Options $options, $attr) use ($pattern){
             if($this->default_attr_class){
