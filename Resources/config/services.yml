@@ -53,10 +53,10 @@ services:
         parent: alsatian_form.form_type.abstract_routable
         arguments: [%alsatian_form.parameters.autocomplete.attr_class%]
 
-    alsatian_form.form_type.datepicker:
+    alsatian_form.form_type.date_picker:
         class: Alsatian\FormBundle\Form\DatePickerType
-        arguments: ["@request_stack"]
+        arguments: ["@request_stack","%alsatian_form.parameters.date_picker.attr_class%"]
 
-    alsatian_form.form_type.datetimepicker:
+    alsatian_form.form_type.datetime_picker:
         class: Alsatian\FormBundle\Form\DateTimePickerType
-        arguments: ["@request_stack"]
+        arguments: ["@request_stack","%alsatian_form.parameters.datetime_picker.attr_class%"]
