@@ -11,12 +11,12 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 class DateTimePickerType extends AbstractType
 {
     protected $request_stack;
-    protected $attr_class;
+    protected $default_attr_class;
         
-    public function __construct($request_stack,$attr_class)
+    public function __construct($request_stack,$default_attr_class)
     {
         $this->request_stack = $request_stack;
-        $this->attr_class = $attr_class;
+        $this->default_attr_class = $default_attr_class;
     }
        
    /**
