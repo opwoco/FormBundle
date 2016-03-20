@@ -30,7 +30,7 @@ class DatePickerType extends AbstractType
         $resolver->setDefaults(array('format'=>$pattern,'widget'=>'single_text'));
 
         $resolver->setDefault('attr', function(Options $options, $attr) use ($pattern){
-            if($this->default_default_attr_class){
+            if($this->default_attr_class){
                 $attr['class'] = $this->default_attr_class;
             }
 
