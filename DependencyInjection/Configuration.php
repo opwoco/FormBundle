@@ -16,6 +16,8 @@ class Configuration implements ConfigurationInterface
             ->append($this->getNode('extensible_document'))
             ->append($this->getNode('extensible_entity'))
             ->append($this->getNode('autocomplete'))
+            ->append($this->getNode('date_picker'))
+            ->append($this->getNode('datetime_picker'))
             ;
         
         return $treeBuilder;
