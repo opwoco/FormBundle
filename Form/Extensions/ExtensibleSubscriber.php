@@ -121,10 +121,10 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         else{
             switch($type){
                 case ExtensibleEntityType::class :
-                    $array[] = $this->findEm($class,$data);
+                    $array[] = $this->em->getRepository($class)->findOneById($data);
                 break;
                 case ExtensibleDocumentType::class :
-                    $array[] = $this->findDm($class,$data);
+                    $array[] = $this->dm->getRepository($class)->findOneById($data);
                 break;
             }
         }
@@ -149,23 +149,5 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         }
         
         return $this->accessor->getValue($data,$property);
-    }
-    
-    private function findEm($class,$data)
-    {
-        if(null === $this->em){
-            $this->setEntityManager();
-        }
-        
-        return $this->em->getRepository($class)->findOneById($data);
-    }
-
-    private function findDm($class,$data)
-    {
-        if(null === $this->dm){
-            $this->setDocumentManager();
-        }
-        
-        return $this->dm->getRepository($class)->findOneById($data);
     }
 }
