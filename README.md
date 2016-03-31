@@ -4,8 +4,6 @@ This bundle provide FormTypes extending ChoiceType, EntityType and DocumentType 
 
 Ideal for [Select2](https://select2.github.io/) integration.
 
-Till in developpment.
-
 Works with Symfony ~2.8 || ~3.0
 
 Installation
