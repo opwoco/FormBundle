@@ -109,7 +109,8 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         } 
 
         // Find something better to get options
-        $newOptions = array('choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices);
+        $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices);
+        
         if(array_key_exists('class',$options)){$newOptions=array_merge($newOptions,array('class'=>$options['class']));}
         $form->add($childName,$type,$newOptions);
     }
