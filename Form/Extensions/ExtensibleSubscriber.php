@@ -108,7 +108,7 @@ class ExtensibleSubscriber implements EventSubscriberInterface
             break;
         } 
 
-        // Find something better to get options
+        // Since line 72 is returning all resolved option, only these options are reused :
         $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices);
         
         if(array_key_exists('class',$options)){$newOptions=array_merge($newOptions,array('class'=>$options['class']));}
