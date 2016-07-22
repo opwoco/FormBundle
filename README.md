@@ -91,15 +91,18 @@ This will render HTML like :
 </select>
 ```
 
-Then to apply the select2 ui on your field, you have to write some JS, example :
+The aim of this bundle is only to do the server side work (allowing "extensible" choices).
+You have to write your own Javescript adapters to get it work with Select2.
+
+As example, how I use it :
 
 ```js
 $(document).ready(function(){
-	$('select').each(function(){
-		var configs={allowClear: true,width:'resolve',maximumSelectionLength:10};
-			configs['minimumInputLength'] = 1;
-			configs['ajax']={
-				cache: true,
+	$('.select2').each(function(){
+		var configs={
+		        allowClear: true,
+		        width:'resolve',
+			ajax:{
 				data: function (params) {return {q: params.term};},
 				dataType:'json',delay: 250,
 				processResults: function (data) {
@@ -110,7 +113,7 @@ $(document).ready(function(){
 					return { results: dataresults };
 				}
 			};
-		}
+		};
 
 		$(this).select2(configs);
 	});
