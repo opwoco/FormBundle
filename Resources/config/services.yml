@@ -19,9 +19,6 @@ services:
         class: Alsatian\FormBundle\Form\Extensions\ExtensibleSubscriber
         public: false
         arguments: [%alsatian_form.parameters.extensible.enabled_Types%]
-        calls:
-            - [setEntityManager,["@doctrine.orm.entity_manager"]]
-            - [setDocumentManager,["@doctrine.odm.mongodb.document_manager"]]
 
     alsatian_form.form_type.abstract_extensible:
         class: Alsatian\FormBundle\Form\AbstractRoutableType
