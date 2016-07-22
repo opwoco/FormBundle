@@ -18,7 +18,7 @@ services:
     alsatian_form.form_event_subscriber.extensible:
         class: Alsatian\FormBundle\Form\Extensions\ExtensibleSubscriber
         public: false
-        arguments: [%alsatian_form.parameters.extensible.enabled_Types%]
+        arguments: ["%alsatian_form.parameters.extensible.enabled_Types%"]
 
     alsatian_form.form_type.abstract_extensible:
         class: Alsatian\FormBundle\Form\AbstractRoutableType
@@ -30,25 +30,25 @@ services:
         class: Alsatian\FormBundle\Form\ExtensibleChoiceType
         parent: alsatian_form.form_type.abstract_extensible
         public: false
-        arguments: [%alsatian_form.parameters.extensible_choice.attr_class%]
+        arguments: ["%alsatian_form.parameters.extensible_choice.attr_class%"]
 
     alsatian_form.form_type.extensible_entity:
         class: Alsatian\FormBundle\Form\ExtensibleEntityType
         parent: alsatian_form.form_type.abstract_extensible
         public: false
-        arguments: [%alsatian_form.parameters.extensible_entity.attr_class%]
+        arguments: ["%alsatian_form.parameters.extensible_entity.attr_class%"]
 
     alsatian_form.form_type.extensible_document:
         class: Alsatian\FormBundle\Form\ExtensibleDocumentType
         parent: alsatian_form.form_type.abstract_extensible
         public: false
-        arguments: [%alsatian_form.parameters.extensible_document.attr_class%]
+        arguments: ["%alsatian_form.parameters.extensible_document.attr_class%"]
 
 # Others Types
     alsatian_form.form_type.autocomplete:
         class: Alsatian\FormBundle\Form\AutocompleteType
         parent: alsatian_form.form_type.abstract_routable
-        arguments: [%alsatian_form.parameters.autocomplete.attr_class%]
+        arguments: ["%alsatian_form.parameters.autocomplete.attr_class%"]
 
     alsatian_form.form_type.date_picker:
         class: Alsatian\FormBundle\Form\DatePickerType
