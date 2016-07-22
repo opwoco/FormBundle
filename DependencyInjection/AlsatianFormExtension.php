@@ -30,7 +30,7 @@ class AlsatianFormExtension extends Extension
             
             $formTypes[] = $definition->getClass();
 
-            $container->getDefinition('alsatian_form.form_extension.extensible')
+            $container->getDefinition('alsatian_form.form_event_subscriber.extensible')
                 ->addMethodCall('setEntityManager', array("@doctrine.orm.entity_manager"));
         }
         
@@ -41,7 +41,7 @@ class AlsatianFormExtension extends Extension
             
             $formTypes[] = $definition->getClass();
 
-            $container->getDefinition('alsatian_form.form_extension.extensible')
+            $container->getDefinition('alsatian_form.form_event_subscriber.extensible')
                 ->addMethodCall('setDocumentManager', array("@doctrine.odm.mongodb.document_manager"));
         }
         
