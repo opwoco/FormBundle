@@ -83,3 +83,36 @@ To use these FormTypes :
     $builder->add('extensible_entity', ExtensibleEntityType::class,array('route'=>'ajax_entities','class'=>'AppBundle:Article','choice_label'=>'name'));
     $builder->add('extensible_document', ExtensibleDocumentType::class,array('route'=>'ajax_documents','class'=>'AppBundle:Article','choice_label'=>'name'));
 ```
+
+This will render HTML like :
+```html
+<!-- if %alsatian_form.extensible_choice.attr_class% = 'select2' -->
+<select data-ajax--url="%your_route%" class="select2">
+</select>
+```
+
+Then to apply the select2 ui on your field, you have to write some JS, example :
+
+```js
+$(document).ready(function(){
+	$('select').each(function(){
+		var configs={allowClear: true,width:'resolve',maximumSelectionLength:10};
+			configs['minimumInputLength'] = 1;
+			configs['ajax']={
+				cache: true,
+				data: function (params) {return {q: params.term};},
+				dataType:'json',delay: 250,
+				processResults: function (data) {
+					var dataresults = [];
+					$.each(data, function(key, val){
+						dataresults.push({id: val[0], text: val[1]});
+					});
+					return { results: dataresults };
+				}
+			};
+		}
+
+		$(this).select2(configs);
+	});
+});
+```
