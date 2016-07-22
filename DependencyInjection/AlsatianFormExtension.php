@@ -1,5 +1,3 @@
-
-
 <?php
 namespace Alsatian\FormBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
