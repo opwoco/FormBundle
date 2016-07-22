@@ -1,3 +1,5 @@
+
+
 <?php
 namespace Alsatian\FormBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -29,6 +31,9 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
+
+            $container->getDefinition('alsatian_form.form_extension.extensible')
+                ->addMethodCall('setEntityManager', array("@doctrine.orm.entity_manager"));
         }
         
         if($configFormBundle['extensible_document']['enabled']){
@@ -37,6 +42,9 @@ class AlsatianFormExtension extends Extension
             $definition->addTag('form.type');
             
             $formTypes[] = $definition->getClass();
+
+            $container->getDefinition('alsatian_form.form_extension.extensible')
+                ->addMethodCall('setDocumentManager', array("@doctrine.odm.mongodb.document_manager"));
         }
         
         if($configFormBundle['autocomplete']['enabled']){
