@@ -1,9 +1,14 @@
 <?php
 namespace Alsatian\FormBundle\DependencyInjection;
+
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+
+use Symfony\Component\DependencyInjection\Reference;
+
 class AlsatianFormExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
@@ -31,7 +36,7 @@ class AlsatianFormExtension extends Extension
             $formTypes[] = $definition->getClass();
 
             $container->getDefinition('alsatian_form.form_event_subscriber.extensible')
-                ->addMethodCall('setEntityManager', array("@doctrine.orm.entity_manager"));
+                ->addMethodCall('setEntityManager', array(new Reference("doctrine.orm.entity_manager")));
         }
         
         if($configFormBundle['extensible_document']['enabled']){
@@ -42,7 +47,7 @@ class AlsatianFormExtension extends Extension
             $formTypes[] = $definition->getClass();
 
             $container->getDefinition('alsatian_form.form_event_subscriber.extensible')
-                ->addMethodCall('setDocumentManager', array("@doctrine.odm.mongodb.document_manager"));
+                ->addMethodCall('setDocumentManager', array(new Reference("doctrine.odm.mongodb.document_manager")));
         }
         
         if($configFormBundle['autocomplete']['enabled']){
