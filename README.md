@@ -22,9 +22,8 @@ The bundle provide 6 FormTypes designed to automate some common tasks :
     - **Automatic** : Sets the date pattern with \IntlDateFormatter::SHORT and renders it as 'pattern' attribute in the HTML input.
     - **Configuration** : Insert %alsatian_form.parameters.date_picker.attr_class% as class for the HTML input.
 
-- ***DateTimepickerType***
+- ***DateTimepickerType*** : Extension for the built-in DateTimeType
     
-    Extension for the built-in DateTimeType :
     - **Automatic** : Sets the date pattern with \IntlDateFormatter::SHORT and renders it as 'pattern' attribute in the HTML input.
     - **Configuration** : Insert %alsatian_form.parameters.datetime_picker.attr_class% as class for the HTML input.
 
