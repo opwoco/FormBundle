@@ -114,11 +114,11 @@ class ExtensibleSubscriber implements EventSubscriberInterface
             break;
         }
 
-		$options['choices'] = $choices;
-		
-		// This line is to avoid 'You cannot set both an "em" and "document_manager" option.' error with DocumentType
-		// See DoctrineMongoDBBundle issue #377
-		if(array_key_exists('em',$options)){unset($options['em']);}
+        $options['choices'] = $choices;
+        
+        // This line is to avoid 'You cannot set both an "em" and "document_manager" option.' error with DocumentType
+        // See DoctrineMongoDBBundle issue #377
+        if(array_key_exists('em',$options)){unset($options['em']);}
 
         $form->add($childName,$original,$options);
     }
