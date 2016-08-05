@@ -45,9 +45,13 @@ class ExtensibleSubscriber implements EventSubscriberInterface
          
     private function getListenedType(ResolvedFormTypeInterface $type)
     {
+        $return = array(
+            'original'  => get_class($type->getInnerType())
+        );
         while($type){
             if(in_array(get_class($type->getInnerType()),$this->enabledTypes)){
-                return get_class($type->getInnerType());
+                $return['type'] = get_class($type->getInnerType());
+                return $return;
             }
             
             $type = $type->getParent();
@@ -67,6 +71,8 @@ class ExtensibleSubscriber implements EventSubscriberInterface
      
     private function populateAjaxChoice(FormEvent $event,$childName, $type)
     {   
+        $original = $type['original'];
+        $type = $type['type'];
         $form = $event->getForm();
         $child = $form->get($childName);
         $options = $child->getConfig()->getOptions();
@@ -109,10 +115,10 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         } 
 
         // Since line 72 is returning all resolved option, only these options are reused :
-        $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices);
+        $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices,'attr'=>$options['attr']);
         
         if(array_key_exists('class',$options)){$newOptions=array_merge($newOptions,array('class'=>$options['class']));}
-        $form->add($childName,$type,$newOptions);
+        $form->add($childName,$original,$newOptions);
     }
 
     private function addChoice(&$array,$data,$class,$type){
