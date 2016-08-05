@@ -51,16 +51,16 @@ alsatian_form:
     extensible_document: ~ # To enable Alsatian\FormBundle\Form\ExtensibleDocumentType
 ```    
 
-For each of FormType you can configure a default attr_class parameter, like this :
+For each FormType you can configure a default attr_class parameter, like this :
 
 ```
 alsatian_form:
     extensible_choice:
-        attr_class: select2 # Adds class="select2" in the HTML input
+        attr_class: select2 # Adds class="select2" in the HTML select element
     extensible_entity:
-        attr_class: select2-entity # Adds class="select2-entity" in the HTML input
+        attr_class: select2-entity # Adds class="select2-entity" in the HTML select element
     extensible_document:
-        attr_class: select2-document # Adds class="select2-document" in the HTML input
+        attr_class: select2-document # Adds class="select2-document" in the HTML select element
 ```    
 
 Usage
