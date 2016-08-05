@@ -10,7 +10,7 @@ Features
 ========
 
 The bundle provide 6 FormTypes designed to automate some common tasks :
-_______________________________________________________________________
+-----------------------------------------------------------------------
 
 - ***AutocompleteType*** : Extension for the built-in TextType
     
