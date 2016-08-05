@@ -115,7 +115,7 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         } 
 
         // Since line 72 is returning all resolved option, only these options are reused :
-        $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices);
+        $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices,'attr'=>$options['attr']);
         
         if(array_key_exists('class',$options)){$newOptions=array_merge($newOptions,array('class'=>$options['class']));}
         $form->add($childName,$original,$newOptions);
