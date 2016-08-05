@@ -112,13 +112,15 @@ class ExtensibleSubscriber implements EventSubscriberInterface
                     $choices[$data] = $data;
                 }
             break;
-        } 
+        }
 
-        // Since line 72 is returning all resolved option, only these options are reused :
-        $newOptions = array('constraints'=>$options['constraints'],'choice_label'=>$options['choice_label'],'route'=>$options['route'],'route_params'=>$options['route_params'],'required'=>$options['required'],'multiple'=>$options['multiple'],'choices'=>$choices,'attr'=>$options['attr']);
-        
-        if(array_key_exists('class',$options)){$newOptions=array_merge($newOptions,array('class'=>$options['class']));}
-        $form->add($childName,$original,$newOptions);
+		$options['choices'] = $choices;
+		
+		// This line is to avoid 'You cannot set both an "em" and "document_manager" option.' error with DocumentType
+		// See DoctrineMongoDBBundle issue #377
+		if(array_key_exists('em',$options)){unset($options['em']);}
+
+        $form->add($childName,$original,$options);
     }
 
     private function addChoice(&$array,$data,$class,$type){
