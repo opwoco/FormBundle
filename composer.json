@@ -1,6 +1,6 @@
 {
     "name": "alsatian/form-bundle",
-    "description": "Server side Select2 integration for Symfony3",
+    "description": "Symfony 3 form types to extend built-in types. Ideal for Select2 AJAX implementations.",
     "keywords": ["symfony3","select2"],
     "license": "MIT",
     "require": {
