@@ -6,12 +6,6 @@
     "require": {
         "symfony/framework-bundle": "~2.8|~3.0"
     },
-
-    "suggest": {
-        "doctrine/doctrine-bundle": "to use the Select2EntityType",
-        "doctrine/mongodb-odm-bundle": "to use the Select2DocumentType"
-    },
-    
     "autoload": {
         "psr-4": {"Alsatian\\FormBundle\\": ""}
     }
