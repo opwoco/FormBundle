@@ -15,24 +15,11 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 class ExtensibleSubscriber implements EventSubscriberInterface
 {
     private $enabledTypes;
-
-    private $em = null;
-    private $dm = null;
     private $accessor = null;
     
     public function __construct($enabledTypes)
     {
         $this->enabledTypes = $enabledTypes;
-    }
- 
-    public function setEntityManager($em)
-    {
-        $this->em = $em;
-    }
-
-    public function setDocumentManager($dm)
-    {
-        $this->dm = $dm;
     }
     
     public static function getSubscribedEvents()
@@ -41,23 +28,6 @@ class ExtensibleSubscriber implements EventSubscriberInterface
             FormEvents::PRE_SET_DATA => array('populateAjaxChoices',-50),
             FormEvents::PRE_SUBMIT   => array('populateAjaxChoices',-50)
         );
-    }
-         
-    private function getListenedType(ResolvedFormTypeInterface $type)
-    {
-        $return = array(
-            'original'  => get_class($type->getInnerType())
-        );
-        while($type){
-            if(in_array(get_class($type->getInnerType()),$this->enabledTypes)){
-                $return['type'] = get_class($type->getInnerType());
-                return $return;
-            }
-            
-            $type = $type->getParent();
-        }
-        
-        return false;
     }
      
     public function populateAjaxChoices(FormEvent $event)
@@ -71,72 +41,70 @@ class ExtensibleSubscriber implements EventSubscriberInterface
      
     private function populateAjaxChoice(FormEvent $event,$childName, $type)
     {   
-        $original = $type['original'];
-        $type = $type['type'];
         $form = $event->getForm();
-        $child = $form->get($childName);
-        $options = $child->getConfig()->getOptions();
-
-        $choices = array();
+        $options = $form->get($childName)->getConfig()->getOptions();
 
         $data = $event->getData();
-        if(is_array($data)){$property = '['.$childName.']';}
-        else
-        {$property = $childName;}
+        if(is_array($data)){
+            $property = '['.$childName.']';
+        }
+        else{
+            $property = $childName;
+        }
         
         if(!$this->isReadable($data,$property)){return;}
         
         $data = $this->getValue($data,$property);
         if(!$data){return;}
         
-        switch($type)
+        switch($type['listenedType'])
         {
-            case ExtensibleEntityType::class :
-            case ExtensibleDocumentType::class :
-                if(is_array($data) || $data instanceOf \Traversable){
-                    foreach($data as $Entity){
-                        $this->addChoice($choices,$Entity,$options['class'],$type);
-                    }
-                }
-                else{
-                    $this->addChoice($choices,$data,$options['class'],$type);
-                }
-            break;
             case ExtensibleChoiceType::class:
                 if(is_array($data)){
-                    foreach($data as $choice){
-                        $choices[$choice] = $choice;
-                    }
+                    $choices = array_combine($data,$data);
                 }
                 else{
-                    $choices[$data] = $data;
+                    $choices = array($data => $data);
                 }
+            
+            break;
+            case ExtensibleDocumentType::class :
+                $choices = $this->getChoices($data,$options);
+
+                // These lines are to avoid 'You cannot set both an "em" and "document_manager" option.'
+                // DocumentType moves 'document_manager' option to 'em' option, here we do first the inverse ...
+                // See DoctrineMongoDBBundle issue #377
+                
+                $options['document_manager'] = $options['em'];
+                unset($options['em']);
+
+            break;
+            case ExtensibleEntityType::class :
+                $choices = $this->getChoices($data,$options);
+            
             break;
         }
 
         $options['choices'] = $choices;
-        
-        // This line is to avoid 'You cannot set both an "em" and "document_manager" option.' error with DocumentType
-        // See DoctrineMongoDBBundle issue #377
-        if(array_key_exists('em',$options)){unset($options['em']);}
 
-        $form->add($childName,$original,$options);
+        $form->add($childName,$type['originalType'],$options);
     }
+         
+    private function getListenedType(ResolvedFormTypeInterface $type)
+    {
+        $return = array('originalType'  => get_class($type->getInnerType()));
 
-    private function addChoice(&$array,$data,$class,$type){
-        if(is_object($data)){
-             $array[] = $data;
-        }
-        else{
-            switch($type){
-                case ExtensibleEntityType::class :
-                    $array[] = $this->em->getRepository($class)->findOneById($data);
-                break;
-                case ExtensibleDocumentType::class :
-                    $array[] = $this->dm->getRepository($class)->findOneById($data);
-                break;
+        while($type){
+            if(in_array(get_class($type->getInnerType()),$this->enabledTypes)){
+                $return['listenedType'] = get_class($type->getInnerType());
+
+                return $return;
             }
+            
+            $type = $type->getParent();
         }
+        
+        return false;
     }
     
     private function getPropertyAccessor()
@@ -158,5 +126,19 @@ class ExtensibleSubscriber implements EventSubscriberInterface
         }
         
         return $this->accessor->getValue($data,$property);
+    }
+
+    private function getChoices($data,$options){
+        if(is_object($data)){
+            if($data instanceOf \Traversable){
+                return $data;
+            }
+            else{
+                return array($data);
+            }
+        }
+        else{
+            return $options['em']->getRepository($options['class'])->findById($data);
+        }
     }
 }
