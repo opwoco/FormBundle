@@ -1,5 +1,5 @@
 {
-    "name": "alsatian/form-bundle",
+    "name": "opwoco/form-bundle",
     "description": "Symfony 3 form types to extend built-in types. Ideal for Select2 AJAX implementations.",
     "keywords": ["symfony3","select2"],
     "license": "MIT",
@@ -7,6 +7,6 @@
         "symfony/framework-bundle": "~2.8|~3.0"
     },
     "autoload": {
-        "psr-4": {"Alsatian\\FormBundle\\": ""}
+        "psr-4": {"opwoco\\FormBundle\\": ""}
     }
 }
